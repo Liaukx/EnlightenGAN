@@ -29,7 +29,7 @@ def CreateDataset(opt):
     dataset.initialize(opt)
     return dataset
 
-
+# load_data
 class CustomDatasetDataLoader(BaseDataLoader):
     def name(self):
         return 'CustomDatasetDataLoader'

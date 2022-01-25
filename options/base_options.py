@@ -5,7 +5,7 @@ import torch
 
 class BaseOptions():
     def __init__(self):
-        self.parser = argparse.ArgumentParser()
+        self.parser = argparse.ArgumentParser() #解析命令行参数
         self.initialized = False
 
     def initialize(self):
@@ -88,6 +88,7 @@ class BaseOptions():
         self.opt = self.parser.parse_args()
         self.opt.isTrain = self.isTrain   # train or test
 
+        #获取 gpuid
         str_ids = self.opt.gpu_ids.split(',')
         self.opt.gpu_ids = []
         for str_id in str_ids:
@@ -101,6 +102,7 @@ class BaseOptions():
 
         args = vars(self.opt)
 
+        # 打印出你设置的opt参数
         print('------------ Options -------------')
         for k, v in sorted(args.items()):
             print('%s: %s' % (str(k), str(v)))

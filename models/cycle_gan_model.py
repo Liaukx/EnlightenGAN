@@ -36,7 +36,7 @@ class CycleGANModel(BaseModel):
                 param.requires_grad = False
         # load/define networks
         # The naming conversion is different from those used in the paper
-        # Code (paper): G_A (G), G_B (F), D_A (D_Y), D_B (D_X)
+        # TODO  Code (paper): G_A (G), G_B (F), D_A (D_Y), D_B (D_X)
 
         skip = True if opt.skip > 0 else False
         self.netG_A = networks.define_G(opt.input_nc, opt.output_nc,
