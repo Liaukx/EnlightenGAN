@@ -19,6 +19,11 @@ You should prepare at least 3 1080ti gpus or change the batch size.
 ```mkdir model``` </br>
 Download VGG pretrained model from [[Google Drive 1]](https://drive.google.com/file/d/1IfCeihmPqGWJ0KHmH-mTMi_pn3z3Zo-P/view?usp=sharing), and then put it into the directory `model`.
 
+我们的工作中：
+安装相关库
+下载vgg16模型 line20
+下载数据集 EnlightenGAN/final_dataset/trainA   EnlightenGAN/final_dataset/trainB
+
 ### Training process
 Before starting training process, you should launch the `visdom.server` for visualizing.
 
