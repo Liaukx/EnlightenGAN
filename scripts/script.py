@@ -24,7 +24,7 @@ if opt.train:
 		--fineSize 320 \
         --patchSize 32 \
 		--skip 1 \
-		--batchSize 4 \
+		--batchSize 16 \
         --self_attention \
 		--use_norm 1 \
 		--use_wgan 0 \
@@ -40,7 +40,7 @@ if opt.train:
 elif opt.predict:
 	for i in range(1):
 	        os.system("python predict.py \
-	        	--dataroot ../test_dataset \
+	        	--dataroot test_dataset\
 	        	--name enlightening \
 	        	--model single \
 	        	--which_direction AtoB \
