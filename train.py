@@ -4,7 +4,7 @@ from data.data_loader import CreateDataLoader
 from models.models import create_model
 from util.visualizer import Visualizer
 
-#读取配置文件
+#TODO 读取配置文件
 def get_config(config):
     import yaml     
     with open(config, 'r') as stream:

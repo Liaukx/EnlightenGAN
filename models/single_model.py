@@ -84,6 +84,7 @@ class SingleModel(BaseModel):
             if opt.use_wgan:
                 self.criterionGAN = networks.DiscLossWGANGP()
             else:
+                # TODO GANLoss
                 self.criterionGAN = networks.GANLoss(use_lsgan=not opt.no_lsgan, tensor=self.Tensor)
             if opt.use_mse:
                 self.criterionCycle = torch.nn.MSELoss()
@@ -191,6 +192,7 @@ class SingleModel(BaseModel):
             loss_D = loss_D_fake - loss_D_real + self.criterionGAN.calc_gradient_penalty(netD, 
                                                 real.data, fake.data)
         elif self.opt.use_ragan and use_ragan:
+            # TODO lossD
             loss_D = (self.criterionGAN(pred_real - torch.mean(pred_fake), True) +
                                       self.criterionGAN(pred_fake - torch.mean(pred_real), False)) / 2
         else:
@@ -201,6 +203,7 @@ class SingleModel(BaseModel):
         return loss_D
 
     def backward_D_A(self):
+        # TODO attention
         fake_B = self.fake_B_pool.query(self.fake_B)
         fake_B = self.fake_B
         self.loss_D_A = self.backward_D_basic(self.netD_A, self.real_B, fake_B, True)
@@ -330,6 +333,7 @@ class SingleModel(BaseModel):
         else:
             vgg_w = 1
         if self.opt.vgg > 0:
+            #TODO  SFP
             self.loss_vgg_b = self.vgg_loss.compute_vgg_loss(self.vgg, 
                     self.fake_B, self.real_A) * self.opt.vgg if self.opt.vgg > 0 else 0
             if self.opt.patch_vgg:
@@ -350,6 +354,7 @@ class SingleModel(BaseModel):
                     self.loss_vgg_b += loss_vgg_patch/float(self.opt.patchD_3 + 1)
                 else:
                     self.loss_vgg_b += loss_vgg_patch
+            # TOOD Loss
             self.loss_G = self.loss_G_A + self.loss_vgg_b*vgg_w
         elif self.opt.fcn > 0:
             self.loss_fcn_b = self.fcn_loss.compute_fcn_loss(self.fcn, 
