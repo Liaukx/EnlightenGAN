@@ -1085,39 +1085,39 @@ class IMDB_Unet_resize_conv(nn.Module):
         if opt.self_attention:
             self.conv1_1 = nn.Conv2d(4, 32, 3, padding=p)
             self.downsample_1 = nn.Sequential(
-                nn.Conv2d(1, 32, 3, padding=p),
-                IMDModule(in_channels=32),
-                IMDModule(in_channels=32),
-                # IMDModule(in_channels=16),
-                # IMDModule(in_channels=16),
-                nn.Conv2d(32, 1, 3, padding=p),
+                nn.Conv2d(1, 16, 3, padding=p),
+                # IMDModule(in_channels=32),
+                # IMDModule(in_channels=32),
+                IMDModule(in_channels=16),
+                IMDModule(in_channels=16),
+                nn.Conv2d(16, 1, 3, padding=p),
                 nn.MaxPool2d(2)
             ) 
             self.downsample_2 = nn.Sequential(
-                nn.Conv2d(1, 32, 3, padding=p),
-                IMDModule(in_channels=32),
-                IMDModule(in_channels=32),
-                # IMDModule(in_channels=16),
-                # IMDModule(in_channels=16),
-                nn.Conv2d(32, 1, 3, padding=p),
+               nn.Conv2d(1, 16, 3, padding=p),
+                # IMDModule(in_channels=32),
+                # IMDModule(in_channels=32),
+                IMDModule(in_channels=16),
+                IMDModule(in_channels=16),
+                nn.Conv2d(16, 1, 3, padding=p),
                 nn.MaxPool2d(2)
             ) 
             self.downsample_3 = nn.Sequential(
-                nn.Conv2d(1, 32, 3, padding=p),
-                IMDModule(in_channels=32),
-                IMDModule(in_channels=32),
-                # IMDModule(in_channels=16),
-                # IMDModule(in_channels=16),
-                nn.Conv2d(32, 1, 3, padding=p),
+                nn.Conv2d(1, 16, 3, padding=p),
+                # IMDModule(in_channels=32),
+                # IMDModule(in_channels=32),
+                IMDModule(in_channels=16),
+                IMDModule(in_channels=16),
+                nn.Conv2d(16, 1, 3, padding=p),
                 nn.MaxPool2d(2)
             ) 
             self.downsample_4 = nn.Sequential(
-                nn.Conv2d(1, 32, 3, padding=p),
-                IMDModule(in_channels=32),
-                IMDModule(in_channels=32),
-                # IMDModule(in_channels=16),
-                # IMDModule(in_channels=16),
-                nn.Conv2d(32, 1, 3, padding=p),
+                nn.Conv2d(1, 16, 3, padding=p),
+                # IMDModule(in_channels=32),
+                # IMDModule(in_channels=32),
+                IMDModule(in_channels=16),
+                IMDModule(in_channels=16),
+                nn.Conv2d(16, 1, 3, padding=p),
                 nn.MaxPool2d(2)
             ) 
             # self.downsample_2 = nn.MaxPool2d(2)
@@ -1229,8 +1229,7 @@ class IMDB_Unet_resize_conv(nn.Module):
             # pass
         input, pad_left, pad_right, pad_top, pad_bottom = pad_tensor(input)
         gray, pad_left, pad_right, pad_top, pad_bottom = pad_tensor(gray)
-        
-        
+        # TODO mapping net  input: batchsize/gpu_num * 3 *  height(320) * weight(320) 我把nosie映射到 320 * 320 的图像上再为他增加一个通道。复制16份cat到一起
         if self.opt.self_attention:
             gray_2 = self.downsample_1(gray)
             gray_3 = self.downsample_2(gray_2)
